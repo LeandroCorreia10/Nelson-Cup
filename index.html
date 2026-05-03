@@ -5,66 +5,203 @@
 <title>Nelson Cup</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: Arial;
-  background: #0f172a;
+  font-family: Arial, sans-serif;
+  background: #07111f;
   color: white;
   text-align: center;
 }
 
 header {
-  padding: 30px;
-  background: linear-gradient(90deg, #22c55e, #0ea5e9);
+  padding: 35px 20px;
+  background: linear-gradient(135deg, #16a34a, #0284c7);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
 }
 
 h1 {
-  font-size: 60px;
-  margin: 0;
+  font-size: 64px;
+  margin: 0 0 25px;
+  letter-spacing: 2px;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 nav button {
-  margin: 10px;
-  padding: 10px 15px;
-  border-radius: 20px;
+  font-size: 22px;
+  padding: 16px 28px;
+  border-radius: 18px;
   border: none;
   font-weight: bold;
+  background: white;
+  color: #07111f;
+  cursor: pointer;
 }
 
 section {
-  padding: 30px;
+  padding: 35px 20px;
 }
 
 .hidden {
   display: none;
 }
 
-.player-card {
-  width: 260px;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, gold, #fff1a8);
-  color: black;
+.section-title {
+  font-size: 46px;
+  margin-bottom: 10px;
 }
 
-.player-photo {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
+.title-line {
+  width: 90px;
+  height: 5px;
+  background: #facc15;
+  margin: 0 auto 30px;
   border-radius: 10px;
 }
 
-.stats {
-  margin-top: 10px;
+.players-list {
+  max-width: 420px;
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+}
+
+.players-list button {
+  width: 100%;
+  padding: 20px;
+  font-size: 24px;
   font-weight: bold;
+  border-radius: 18px;
+  border: 2px solid #38bdf8;
+  background: #0f172a;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+}
+
+.players-list button:hover {
+  background: #1e293b;
+}
+
+.copa-card {
+  background: #0f172a;
+  max-width: 360px;
+  margin: 25px auto;
+  padding: 25px;
+  border-radius: 20px;
+  border: 2px solid #22c55e;
+}
+
+.player-page {
+  min-height: 100vh;
+  padding: 35px 20px;
+  background: radial-gradient(circle at top, #1e3a8a, #020617 70%);
+}
+
+.back-button {
+  font-size: 20px;
+  padding: 14px 24px;
+  border-radius: 14px;
+  border: none;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.player-card {
+  width: min(92vw, 390px);
+  min-height: 600px;
+  margin: 0 auto;
+  padding: 25px;
+  border-radius: 35px;
+  background: linear-gradient(145deg, #b8860b, #ffe082, #d4af37, #fff2a8);
+  color: #1f1600;
+  box-shadow: 0 0 35px rgba(250,204,21,0.5);
+  border: 4px solid #fff0a6;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.overall {
+  font-size: 58px;
+  font-weight: 900;
+}
+
+.trophy-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.trophy-box img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.player-photo {
+  width: 210px;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-top: 15px;
+  border: 4px solid rgba(255,255,255,0.7);
+}
+
+.player-name {
+  font-size: 42px;
+  font-weight: 900;
+  margin: 18px 0;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.stat {
+  background: rgba(255,255,255,0.35);
+  padding: 10px;
+  border-radius: 14px;
+}
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 48px;
+  }
+
+  nav button {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .section-title {
+    font-size: 38px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
+<header id="mainHeader">
   <h1>Nelson Cup</h1>
   <nav>
     <button onclick="showPage('home')">Início</button>
@@ -74,45 +211,59 @@ section {
 </header>
 
 <section id="home">
-  <h2>🏆 Copas de rua de futebol</h2>
+  <h2 class="section-title">🏆 Copas de rua de futebol</h2>
+  <div class="title-line"></div>
+  <p>Bem-vindo ao site oficial da Nelson Cup.</p>
 </section>
 
 <section id="copas" class="hidden">
-  <h2>🏆 Últimas Copas</h2>
-  <div>
-    <h3>Nelson Cup</h3>
+  <h2 class="section-title">🏆 Últimas Copas</h2>
+  <div class="title-line"></div>
+
+  <div class="copa-card">
+    <h2>Nelson Cup</h2>
     <p>Data: 03/05/26</p>
     <p>Campeão: --</p>
   </div>
 </section>
 
 <section id="jogadores" class="hidden">
-  <h2>Jogadores</h2>
+  <h2 class="section-title">⚽ Jogadores</h2>
+  <div class="title-line"></div>
 
-  <button onclick="openPlayer('Pedro')">Pedro</button>
-  <button onclick="openPlayer('Lucca')">Lucca</button>
-  <button onclick="openPlayer('Gabriel')">Gabriel</button>
-  <button onclick="openPlayer('Luiz')">Luiz</button>
-  <button onclick="openPlayer('Ygor')">Ygor</button>
-  <button onclick="openPlayer('Leandro')">Leandro</button>
+  <div class="players-list">
+    <button onclick="openPlayer('Pedro')">• Pedro</button>
+    <button onclick="openPlayer('Lucca')">• Lucca</button>
+    <button onclick="openPlayer('Gabriel')">• Gabriel</button>
+    <button onclick="openPlayer('Luiz')">• Luiz</button>
+    <button onclick="openPlayer('Ygor')">• Ygor</button>
+    <button onclick="openPlayer('Leandro')">• Leandro</button>
+  </div>
+</section>
 
+<section id="playerPage" class="hidden player-page">
+  <button class="back-button" onclick="showPage('jogadores')">← Voltar</button>
   <div id="playerArea"></div>
 </section>
 
 <script>
 const players = {
-  Pedro:   {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"images/foto.png"},
-  Lucca:   {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"images/17777773382614658375343907720176.jpg"},
-  Gabriel: {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"images/foto.png"},
-  Luiz:    {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"images/foto.png"},
-  Ygor:    {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"images/foto.png"},
-  Leandro: {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"images/foto.png"}
+  Pedro:   {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"},
+  Lucca:   {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/17777773382614658375343907720176.jpg"},
+  Gabriel: {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"},
+  Luiz:    {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"},
+  Ygor:    {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"},
+  Leandro: {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"}
 };
 
 function showPage(page) {
   document.getElementById("home").classList.add("hidden");
   document.getElementById("copas").classList.add("hidden");
   document.getElementById("jogadores").classList.add("hidden");
+  document.getElementById("playerPage").classList.add("hidden");
+
+  document.getElementById("mainHeader").style.display =
+    page === "playerPage" ? "none" : "block";
 
   document.getElementById(page).classList.remove("hidden");
 }
@@ -126,19 +277,31 @@ function openPlayer(name) {
 
   document.getElementById("playerArea").innerHTML = `
     <div class="player-card">
-      <h2>${String(overall).padStart(2,"0")}</h2>
-      <img class="player-photo" src="${p.foto}">
-      <h3>${name}</h3>
+      <div class="card-top">
+        <div class="overall">${String(overall).padStart(2,"0")}</div>
+
+        <div class="trophy-box">
+          <img src="images/427687.png" alt="Troféu">
+          <span>${p.copas}</span>
+        </div>
+      </div>
+
+      <img class="player-photo" src="${p.foto}" alt="${name}">
+
+      <div class="player-name">${name}</div>
+
       <div class="stats">
-        RIT ${String(p.rit).padStart(2,"0")} |
-        FIN ${String(p.fin).padStart(2,"0")} |
-        PAS ${String(p.pas).padStart(2,"0")} |
-        CON ${String(p.con).padStart(2,"0")} |
-        DEF ${String(p.def).padStart(2,"0")} |
-        FÍS ${String(p.fis).padStart(2,"0")}
+        <div class="stat">RIT ${String(p.rit).padStart(2,"0")}</div>
+        <div class="stat">FIN ${String(p.fin).padStart(2,"0")}</div>
+        <div class="stat">PAS ${String(p.pas).padStart(2,"0")}</div>
+        <div class="stat">CON ${String(p.con).padStart(2,"0")}</div>
+        <div class="stat">DEF ${String(p.def).padStart(2,"0")}</div>
+        <div class="stat">FÍS ${String(p.fis).padStart(2,"0")}</div>
       </div>
     </div>
   `;
+
+  showPage("playerPage");
 }
 </script>
 
