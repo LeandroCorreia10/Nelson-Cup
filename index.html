@@ -5,9 +5,7 @@
 <title>Nelson Cup</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -30,7 +28,6 @@ h1 {
   font-size: 58px;
   margin: 0 0 25px;
   letter-spacing: 3px;
-  text-shadow: 0 0 18px rgba(255,255,255,0.35);
 }
 
 nav {
@@ -44,12 +41,11 @@ nav button {
   font-size: 22px;
   padding: 18px 34px;
   border-radius: 20px;
-  border: 2px solid rgba(255,255,255,0.8);
+  border: 2px solid white;
   font-weight: 900;
-  background: linear-gradient(135deg, #ffffff, #dbeafe);
+  background: linear-gradient(135deg, white, #dbeafe);
   color: #020617;
   cursor: pointer;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.35);
   transition: 0.25s;
 }
 
@@ -66,7 +62,6 @@ section {
   display: none;
 }
 
-/* HOME */
 .hero {
   min-height: 72vh;
   display: flex;
@@ -76,7 +71,6 @@ section {
     radial-gradient(circle at top left, rgba(34,197,94,0.35), transparent 35%),
     radial-gradient(circle at bottom right, rgba(14,165,233,0.3), transparent 40%),
     #020617;
-  overflow: hidden;
 }
 
 .hero-box {
@@ -89,7 +83,6 @@ section {
   border: 2px solid rgba(250,204,21,0.45);
   border-radius: 28px;
   padding: 30px;
-  box-shadow: 0 0 45px rgba(250,204,21,0.15);
 }
 
 .hero-text h2 {
@@ -100,16 +93,12 @@ section {
 .sub {
   font-size: 21px;
   color: #cbd5f5;
-  margin-top: 14px;
-  line-height: 1.5;
 }
 
 .highlight {
   font-size: 22px;
   font-weight: bold;
   color: #facc15;
-  margin-top: 18px;
-  letter-spacing: 1px;
 }
 
 .cta {
@@ -122,13 +111,6 @@ section {
   background: linear-gradient(135deg, #22c55e, #0ea5e9);
   color: white;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-  transition: 0.3s;
-}
-
-.cta:hover {
-  transform: scale(1.08);
-  background: linear-gradient(135deg, #4ade80, #38bdf8);
 }
 
 .hero-img {
@@ -140,15 +122,10 @@ section {
 }
 
 @keyframes float {
-  0%, 100% { 
-    transform: translateY(0); 
-  }
-  50% { 
-    transform: translateY(-14px); 
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
 }
 
-/* TÍTULOS */
 .section-title {
   font-size: 46px;
   margin-bottom: 10px;
@@ -162,7 +139,6 @@ section {
   border-radius: 10px;
 }
 
-/* COPAS */
 .copa-card {
   background: linear-gradient(135deg, #0f172a, #1e293b);
   max-width: 380px;
@@ -170,10 +146,8 @@ section {
   padding: 28px;
   border-radius: 24px;
   border: 2px solid #22c55e;
-  box-shadow: 0 0 25px rgba(34,197,94,0.25);
 }
 
-/* JOGADORES */
 .players-list {
   max-width: 430px;
   margin: 0 auto;
@@ -191,16 +165,8 @@ section {
   background: linear-gradient(135deg, #0f172a, #1e293b);
   color: white;
   cursor: pointer;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.35);
-  transition: 0.25s;
 }
 
-.players-list button:hover {
-  transform: scale(1.05);
-  border-color: #facc15;
-}
-
-/* PÁGINA DO PLAYER */
 .player-page {
   min-height: 100vh;
   padding: 35px 20px;
@@ -227,18 +193,6 @@ section {
   color: #1f1600;
   box-shadow: 0 0 35px rgba(250,204,21,0.5);
   border: 4px solid #fff0a6;
-  animation: cardAppear 0.4s ease;
-}
-
-@keyframes cardAppear {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
 }
 
 .card-top {
@@ -263,7 +217,6 @@ section {
 .trophy-box img {
   width: 42px;
   height: 42px;
-  object-fit: contain;
 }
 
 .player-photo {
@@ -295,28 +248,17 @@ section {
   border-radius: 14px;
 }
 
-/* CELULAR */
 @media (max-width: 700px) {
-  h1 {
-    font-size: 48px;
-  }
+  h1 { font-size: 48px; }
 
   nav button {
     width: 100%;
     max-width: 310px;
   }
 
-  .hero-box {
-    grid-template-columns: 1fr;
-  }
+  .hero-box { grid-template-columns: 1fr; }
 
-  .hero-text h2 {
-    font-size: 36px;
-  }
-
-  .section-title {
-    font-size: 38px;
-  }
+  .hero-text h2 { font-size: 36px; }
 }
 </style>
 </head>
@@ -335,7 +277,6 @@ section {
 
 <section id="home" class="hero">
   <div class="hero-box">
-
     <div class="hero-text">
       <h2>🏆 Bem-vindo ao Nelson Cup</h2>
 
@@ -353,7 +294,6 @@ section {
     </div>
 
     <img class="hero-img" src="images/IsagiRender.webp" alt="Jogador Nelson Cup">
-
   </div>
 </section>
 
@@ -379,6 +319,7 @@ section {
     <button onclick="playClick(); openPlayer('Luiz')">• Luiz</button>
     <button onclick="playClick(); openPlayer('Ygor')">• Ygor</button>
     <button onclick="playClick(); openPlayer('Leandro')">• Leandro</button>
+    <button onclick="playClick(); openPlayer('Heitor')">• Heitor</button>
   </div>
 </section>
 
@@ -394,7 +335,8 @@ const players = {
   Gabriel: {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"},
   Luiz:    {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"},
   Ygor:    {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"},
-  Leandro: {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"}
+  Leandro: {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"},
+  Heitor:  {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"}
 };
 
 function playClick() {
