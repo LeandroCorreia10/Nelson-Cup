@@ -7,101 +7,56 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   background: #0f172a;
   color: white;
   text-align: center;
 }
 
 header {
-  padding: 35px;
+  padding: 30px;
   background: linear-gradient(90deg, #22c55e, #0ea5e9);
 }
 
 h1 {
-  font-size: 62px;
+  font-size: 60px;
   margin: 0;
 }
 
-nav {
-  margin-top: 18px;
-}
-
 nav button {
-  background: white;
-  color: #0f172a;
-  border: none;
-  padding: 10px 18px;
-  margin: 5px;
+  margin: 10px;
+  padding: 10px 15px;
   border-radius: 20px;
+  border: none;
   font-weight: bold;
 }
 
 section {
-  padding: 35px;
+  padding: 30px;
 }
 
 .hidden {
   display: none;
 }
 
-.copas-title {
-  font-size: 38px;
-}
-
-.card-copa {
-  background: #1e293b;
-  padding: 25px;
-  border-radius: 14px;
+.player-card {
   width: 260px;
   margin: 20px auto;
-}
-
-.players-list button {
-  display: block;
-  margin: 12px auto;
-  width: 220px;
-  padding: 14px;
-  border-radius: 12px;
-  border: none;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.player-card {
-  width: 270px;
-  margin: 25px auto;
-  padding: 22px;
-  border-radius: 25px;
-  background: linear-gradient(135deg, #d4af37, #fff1a8, #b8860b);
-  color: #211700;
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-}
-
-.overall {
-  font-size: 48px;
-  font-weight: bold;
+  padding: 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, gold, #fff1a8);
+  color: black;
 }
 
 .player-photo {
   width: 150px;
   height: 150px;
-  border-radius: 15px;
   object-fit: cover;
-  background: #222;
-}
-
-.player-name {
-  font-size: 34px;
-  font-weight: bold;
-  margin: 10px;
+  border-radius: 10px;
 }
 
 .stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  font-size: 20px;
+  margin-top: 10px;
   font-weight: bold;
 }
 </style>
@@ -113,55 +68,52 @@ section {
   <h1>Nelson Cup</h1>
   <nav>
     <button onclick="showPage('home')">Início</button>
-    <button onclick="showPage('jogadores')">Jogadores</button>
     <button onclick="showPage('copas')">Copas</button>
+    <button onclick="showPage('jogadores')">Jogadores</button>
   </nav>
 </header>
 
 <section id="home">
   <h2>🏆 Copas de rua de futebol</h2>
-  <p>Bem-vindo ao site oficial da Nelson Cup.</p>
 </section>
 
 <section id="copas" class="hidden">
-  <h2 class="copas-title">🏆 Últimas Copas</h2>
-
-  <div class="card-copa">
+  <h2>🏆 Últimas Copas</h2>
+  <div>
     <h3>Nelson Cup</h3>
     <p>Data: 03/05/26</p>
-    <p>Campeão: ainda não definido</p>
+    <p>Campeão: --</p>
   </div>
 </section>
 
 <section id="jogadores" class="hidden">
   <h2>Jogadores</h2>
 
-  <div class="players-list">
-    <button onclick="openPlayer('Pedro')">Pedro</button>
-    <button onclick="openPlayer('Lucca')">Lucca</button>
-    <button onclick="openPlayer('Gabriel')">Gabriel</button>
-    <button onclick="openPlayer('Luiz')">Luiz</button>
-    <button onclick="openPlayer('Ygor')">Ygor</button>
-    <button onclick="openPlayer('Leandro')">Leandro</button>
-  </div>
+  <button onclick="openPlayer('Pedro')">Pedro</button>
+  <button onclick="openPlayer('Lucca')">Lucca</button>
+  <button onclick="openPlayer('Gabriel')">Gabriel</button>
+  <button onclick="openPlayer('Luiz')">Luiz</button>
+  <button onclick="openPlayer('Ygor')">Ygor</button>
+  <button onclick="openPlayer('Leandro')">Leandro</button>
 
   <div id="playerArea"></div>
 </section>
 
 <script>
 const players = {
-  Pedro:   {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"foto.png"},
-  Lucca:   {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"foto.png"},
-  Gabriel: {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"foto.png"},
-  Luiz:    {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"foto.png"},
-  Ygor:    {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"foto.png"},
-  Leandro: {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"foto.png"}
+  Pedro:   {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"images/foto.png"},
+  Lucca:   {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"images/17777773382614658375343907720176.jpg"},
+  Gabriel: {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"images/foto.png"},
+  Luiz:    {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"images/foto.png"},
+  Ygor:    {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"images/foto.png"},
+  Leandro: {rit:0, fin:0, pas:0, con:0, def:0, fis:0, foto:"images/foto.png"}
 };
 
 function showPage(page) {
   document.getElementById("home").classList.add("hidden");
-  document.getElementById("jogadores").classList.add("hidden");
   document.getElementById("copas").classList.add("hidden");
+  document.getElementById("jogadores").classList.add("hidden");
+
   document.getElementById(page).classList.remove("hidden");
 }
 
@@ -174,17 +126,16 @@ function openPlayer(name) {
 
   document.getElementById("playerArea").innerHTML = `
     <div class="player-card">
-      <div class="overall">${String(overall).padStart(2, "0")}</div>
-      <img class="player-photo" src="${p.foto}" alt="${name}">
-      <div class="player-name">${name}</div>
-
+      <h2>${String(overall).padStart(2,"0")}</h2>
+      <img class="player-photo" src="${p.foto}">
+      <h3>${name}</h3>
       <div class="stats">
-        <div>RIT ${String(p.rit).padStart(2, "0")}</div>
-        <div>FIN ${String(p.fin).padStart(2, "0")}</div>
-        <div>PAS ${String(p.pas).padStart(2, "0")}</div>
-        <div>CON ${String(p.con).padStart(2, "0")}</div>
-        <div>DEF ${String(p.def).padStart(2, "0")}</div>
-        <div>FÍS ${String(p.fis).padStart(2, "0")}</div>
+        RIT ${String(p.rit).padStart(2,"0")} |
+        FIN ${String(p.fin).padStart(2,"0")} |
+        PAS ${String(p.pas).padStart(2,"0")} |
+        CON ${String(p.con).padStart(2,"0")} |
+        DEF ${String(p.def).padStart(2,"0")} |
+        FÍS ${String(p.fis).padStart(2,"0")}
       </div>
     </div>
   `;
