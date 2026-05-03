@@ -66,7 +66,6 @@ section {
   display: none;
 }
 
-/* HOME */
 .hero {
   min-height: 72vh;
   display: flex;
@@ -149,7 +148,6 @@ section {
   }
 }
 
-/* TÍTULOS */
 .section-title {
   font-size: 46px;
   margin-bottom: 10px;
@@ -163,7 +161,6 @@ section {
   border-radius: 10px;
 }
 
-/* COPAS */
 .copa-card {
   background: linear-gradient(135deg, #0f172a, #1e293b);
   max-width: 720px;
@@ -182,7 +179,6 @@ section {
   color: #e5e7eb;
 }
 
-/* JOGADORES */
 .players-list {
   max-width: 430px;
   margin: 0 auto;
@@ -209,7 +205,91 @@ section {
   border-color: #facc15;
 }
 
-/* PÁGINA DO PLAYER */
+.mvp-section {
+  min-height: 82vh;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top, rgba(239,68,68,0.28), transparent 35%),
+    radial-gradient(circle at bottom, rgba(250,204,21,0.18), transparent 40%),
+    #020617;
+}
+
+.mvp-section::before,
+.mvp-section::after {
+  content: "🔥";
+  position: absolute;
+  font-size: 90px;
+  opacity: 0.75;
+  animation: firePulse 1.4s infinite alternate ease-in-out;
+}
+
+.mvp-section::before {
+  left: 18px;
+  top: 95px;
+}
+
+.mvp-section::after {
+  right: 18px;
+  bottom: 55px;
+}
+
+@keyframes firePulse {
+  from {
+    transform: scale(1) rotate(-4deg);
+    filter: drop-shadow(0 0 8px #f97316);
+  }
+  to {
+    transform: scale(1.18) rotate(4deg);
+    filter: drop-shadow(0 0 22px #ef4444);
+  }
+}
+
+.mvp-card {
+  width: min(95vw, 650px);
+  margin: 25px auto;
+  padding: 35px 24px;
+  border-radius: 32px;
+  background: linear-gradient(145deg, rgba(15,23,42,0.94), rgba(30,41,59,0.9));
+  border: 2px solid rgba(250,204,21,0.7);
+  box-shadow:
+    0 0 40px rgba(250,204,21,0.18),
+    0 0 80px rgba(239,68,68,0.15);
+  animation: cardAppear 0.45s ease;
+}
+
+.mvp-title {
+  font-size: 46px;
+  margin: 0 0 28px;
+  color: #facc15;
+  text-shadow: 0 0 18px rgba(250,204,21,0.45);
+}
+
+.mvp-photo {
+  width: min(80vw, 360px);
+  height: min(80vw, 360px);
+  object-fit: cover;
+  border-radius: 30px;
+  border: 4px solid #facc15;
+  box-shadow:
+    0 0 35px rgba(250,204,21,0.45),
+    0 0 70px rgba(239,68,68,0.25);
+}
+
+.mvp-name {
+  font-size: 42px;
+  margin: 24px 0 10px;
+  font-weight: 900;
+}
+
+.mvp-description {
+  max-width: 520px;
+  margin: 0 auto;
+  font-size: 19px;
+  line-height: 1.6;
+  color: #e5e7eb;
+}
+
 .player-page {
   min-height: 100vh;
   padding: 35px 20px;
@@ -294,7 +374,6 @@ section {
   border-radius: 14px;
 }
 
-/* TROFÉUS FORA DA CARTA */
 .trophies-outside {
   margin-top: 26px;
   display: grid;
@@ -349,7 +428,6 @@ section {
   color: #e5e7eb;
 }
 
-/* CELULAR */
 @media (max-width: 700px) {
   h1 {
     font-size: 48px;
@@ -370,6 +448,19 @@ section {
 
   .section-title {
     font-size: 38px;
+  }
+
+  .mvp-title {
+    font-size: 36px;
+  }
+
+  .mvp-name {
+    font-size: 34px;
+  }
+
+  .mvp-section::before,
+  .mvp-section::after {
+    font-size: 58px;
   }
 
   .player-photo {
@@ -414,6 +505,7 @@ section {
     <button onclick="playClick(); showPage('home')">Início</button>
     <button onclick="playClick(); showPage('copas')">Copas</button>
     <button onclick="playClick(); showPage('jogadores')">Jogadores</button>
+    <button onclick="playCrowd(); showPage('mvp')">MVP</button>
   </nav>
 </header>
 
@@ -465,6 +557,21 @@ section {
   </div>
 </section>
 
+<section id="mvp" class="hidden mvp-section">
+  <div class="mvp-card">
+    <h2 class="mvp-title">🔥 MVP Player 🔥</h2>
+
+    <img class="mvp-photo" src="images/foto.png" alt="MVP Player">
+
+    <h3 class="mvp-name">Nome do Jogador</h3>
+
+    <p class="mvp-description">
+      Escreva aqui a descrição do MVP: motivo da escolha, desempenho na partida,
+      gols, assistências, defesas, liderança e momentos decisivos.
+    </p>
+  </div>
+</section>
+
 <section id="playerPage" class="hidden player-page">
   <button class="back-button" onclick="playClick(); showPage('jogadores')">← Voltar</button>
   <div id="playerArea"></div>
@@ -477,10 +584,6 @@ const trophies = {
   casual: "images/file_0000000091a871f5a486a80138abd116.png"
 };
 
-/*
-  EDITE LIVREMENTE AQUI AS ÚLTIMAS COPAS.
-  Você pode escrever quantas linhas quiser.
-*/
 const copasTexto = `
 📅 03/05/26:
 Ainda em planejamento.
@@ -612,6 +715,26 @@ function playClick() {
   osc.stop(audio.currentTime + 0.08);
 }
 
+function playCrowd() {
+  const audio = new AudioContext();
+
+  for (let i = 0; i < 8; i++) {
+    const osc = audio.createOscillator();
+    const gain = audio.createGain();
+
+    osc.connect(gain);
+    gain.connect(audio.destination);
+
+    osc.frequency.value = 180 + Math.random() * 520;
+    gain.gain.value = 0.025;
+
+    osc.start(audio.currentTime + i * 0.035);
+    osc.frequency.exponentialRampToValueAtTime(120 + Math.random() * 400, audio.currentTime + 0.45);
+    gain.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + 0.55);
+    osc.stop(audio.currentTime + 0.58);
+  }
+}
+
 function playOpenCardSound() {
   const audio = new AudioContext();
   const osc = audio.createOscillator();
@@ -633,6 +756,7 @@ function showPage(page) {
   document.getElementById("home").classList.add("hidden");
   document.getElementById("copas").classList.add("hidden");
   document.getElementById("jogadores").classList.add("hidden");
+  document.getElementById("mvp").classList.add("hidden");
   document.getElementById("playerPage").classList.add("hidden");
 
   document.getElementById("mainHeader").style.display =
