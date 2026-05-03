@@ -379,7 +379,6 @@ section {
     0 0 70px rgba(29,78,216,0.65);
 }
 
-/* PARTÍCULAS SUAVES EM LOOP */
 .player-card.special-black::before,
 .player-card.special-black::after,
 .player-card.special-blue::before,
@@ -432,39 +431,23 @@ section {
 }
 
 @keyframes blackParticlesA {
-  from {
-    background-position: 0 0, 0 0;
-  }
-  to {
-    background-position: 46px -46px, 72px -72px;
-  }
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 46px -46px, 72px -72px; }
 }
 
 @keyframes blackParticlesB {
-  from {
-    background-position: 0 0, 0 0;
-  }
-  to {
-    background-position: -58px -58px, -90px -90px;
-  }
+  from { background-position: 0 0, 0 0; }
+  to { background-position: -58px -58px, -90px -90px; }
 }
 
 @keyframes blueParticlesA {
-  from {
-    background-position: 0 0, 0 0;
-  }
-  to {
-    background-position: 46px -46px, 72px -72px;
-  }
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 46px -46px, 72px -72px; }
 }
 
 @keyframes blueParticlesB {
-  from {
-    background-position: 0 0, 0 0;
-  }
-  to {
-    background-position: -58px -58px, -90px -90px;
-  }
+  from { background-position: 0 0, 0 0; }
+  to { background-position: -58px -58px, -90px -90px; }
 }
 
 .player-card > * {
@@ -511,24 +494,12 @@ section {
 }
 
 @keyframes bluePhotoVibration {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  20% {
-    transform: translate(-1px, 1px) rotate(-0.4deg);
-  }
-  40% {
-    transform: translate(1px, -1px) rotate(0.4deg);
-  }
-  60% {
-    transform: translate(-1px, -1px) rotate(0deg);
-  }
-  80% {
-    transform: translate(1px, 1px) rotate(0.4deg);
-  }
-  100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
+  0% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-1px, 1px) rotate(-0.4deg); }
+  40% { transform: translate(1px, -1px) rotate(0.4deg); }
+  60% { transform: translate(-1px, -1px) rotate(0deg); }
+  80% { transform: translate(1px, 1px) rotate(0.4deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
 }
 
 .player-name {
@@ -763,25 +734,25 @@ section {
 
     <div class="mvp-rank">TOP 1</div>
 
-    <h2 class="mvp-title">🔥 MVP 000 🔥</h2>
+    <h2 class="mvp-title" id="top1MvpScore">🔥 MVP 000 🔥</h2>
 
-    <img class="mvp-photo" src="images/images (33).jpeg" alt="MVP Player">
+    <img class="mvp-photo" id="top1MvpPhoto" src="images/foto.png" alt="MVP Player">
 
-    <h3 class="mvp-name">Ainda ninguém</h3>
+    <h3 class="mvp-name" id="top1MvpName">Ainda ninguém</h3>
 
-    <p class="mvp-description">
-      Sem descrição
+    <p class="mvp-description" id="top1MvpDescription">
+      Ranking calculado automaticamente com base nas copas ganhas e no overall.
     </p>
 
     <div class="mvp-extra-list">
       <div class="mvp-extra">
-        <span>TOP 2 MVP 000</span>
-        <p>Ainda ninguém</p>
+        <span id="top2MvpScore">TOP 2 MVP 000</span>
+        <p id="top2MvpName">Ainda ninguém</p>
       </div>
 
       <div class="mvp-extra">
-        <span>TOP 3 MVP 000</span>
-        <p>Ainda ninguém</p>
+        <span id="top3MvpScore">TOP 3 MVP 000</span>
+        <p id="top3MvpName">Ainda ninguém</p>
       </div>
     </div>
 
@@ -916,6 +887,83 @@ function atualizarCopas() {
   document.getElementById("copasTextoBox").innerText = copasTexto;
 }
 
+function getOverall(p) {
+  return Math.round(
+    (p.rit + p.fin + p.pas + p.con + p.def + p.fis) / 6
+  );
+}
+
+function calcularMVP(p) {
+  const pontosCopas =
+    (p.casualGanhas * 1) +
+    (p.championsGanhas * 2) +
+    (p.ruaGanhas * 3);
+
+  const overall = getOverall(p);
+
+  return Math.round((pontosCopas / 3) * overall);
+}
+
+function getRankingMVP() {
+  const ranking = [];
+
+  for (const nome in players) {
+    const p = players[nome];
+
+    ranking.push({
+      nome: nome,
+      foto: p.foto,
+      overall: getOverall(p),
+      mvp: calcularMVP(p),
+      ruaGanhas: p.ruaGanhas,
+      championsGanhas: p.championsGanhas,
+      casualGanhas: p.casualGanhas
+    });
+  }
+
+  ranking.sort((a, b) => b.mvp - a.mvp);
+
+  return ranking;
+}
+
+function atualizarMVP() {
+  const ranking = getRankingMVP();
+
+  const top1 = ranking[0];
+  const top2 = ranking[1];
+  const top3 = ranking[2];
+
+  if (top1) {
+    document.getElementById("top1MvpScore").innerText =
+      "🔥 MVP " + String(top1.mvp).padStart(3, "0") + " 🔥";
+
+    document.getElementById("top1MvpName").innerText = top1.nome;
+    document.getElementById("top1MvpPhoto").src = top1.foto;
+
+    document.getElementById("top1MvpDescription").innerText =
+      "Overall: " + top1.overall +
+      " | Rua: " + top1.ruaGanhas +
+      " | Champions: " + top1.championsGanhas +
+      " | Casual: " + top1.casualGanhas;
+  }
+
+  if (top2) {
+    document.getElementById("top2MvpScore").innerText =
+      "TOP 2 MVP " + String(top2.mvp).padStart(3, "0");
+
+    document.getElementById("top2MvpName").innerText =
+      top2.nome + " | Overall " + top2.overall;
+  }
+
+  if (top3) {
+    document.getElementById("top3MvpScore").innerText =
+      "TOP 3 MVP " + String(top3.mvp).padStart(3, "0");
+
+    document.getElementById("top3MvpName").innerText =
+      top3.nome + " | Overall " + top3.overall;
+  }
+}
+
 function playClick() {
   const audio = new AudioContext();
   const osc = audio.createOscillator();
@@ -979,6 +1027,10 @@ function showPage(page) {
     page === "playerPage" ? "none" : "block";
 
   document.getElementById(page).classList.remove("hidden");
+
+  if (page === "mvp") {
+    atualizarMVP();
+  }
 }
 
 function getCardClass(overall) {
@@ -997,11 +1049,7 @@ function openPlayer(name) {
   playOpenCardSound();
 
   const p = players[name];
-
-  const overall = Math.round(
-    (p.rit + p.fin + p.pas + p.con + p.def + p.fis) / 6
-  );
-
+  const overall = getOverall(p);
   const cardClass = getCardClass(overall);
 
   document.getElementById("playerArea").innerHTML = `
@@ -1064,6 +1112,7 @@ function openPlayer(name) {
 }
 
 atualizarCopas();
+atualizarMVP();
 </script>
 
 </body>
