@@ -12,39 +12,50 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #07111f;
+  background: #020617;
   color: white;
   text-align: center;
 }
 
 header {
   padding: 35px 20px;
-  background: linear-gradient(135deg, #16a34a, #0284c7);
-  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  background: linear-gradient(135deg, #16a34a, #0284c7, #1d4ed8);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 h1 {
-  font-size: 64px;
+  font-size: 58px;
   margin: 0 0 25px;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  text-shadow: 0 0 18px rgba(255,255,255,0.35);
 }
 
 nav {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
 nav button {
-  font-size: 22px;
-  padding: 16px 28px;
+  font-size: 20px;
+  padding: 17px 30px;
   border-radius: 18px;
-  border: none;
-  font-weight: bold;
-  background: white;
-  color: #07111f;
+  border: 2px solid rgba(255,255,255,0.7);
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff, #dbeafe);
+  color: #020617;
   cursor: pointer;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+  transition: 0.25s;
+}
+
+nav button:hover {
+  transform: scale(1.08);
+  background: #facc15;
 }
 
 section {
@@ -55,21 +66,74 @@ section {
   display: none;
 }
 
+.hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at top left, rgba(34,197,94,0.35), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(14,165,233,0.3), transparent 40%),
+    #020617;
+  overflow: hidden;
+}
+
+.hero-box {
+  width: min(1100px, 95vw);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 25px;
+  background: rgba(15,23,42,0.75);
+  border: 2px solid rgba(250,204,21,0.45);
+  border-radius: 28px;
+  padding: 30px;
+  box-shadow: 0 0 45px rgba(250,204,21,0.15);
+}
+
+.hero-text h2 {
+  font-size: 46px;
+  margin: 0;
+}
+
+.hero-text p {
+  font-size: 20px;
+  line-height: 1.5;
+  color: #dbeafe;
+}
+
+.hero-text strong {
+  color: #facc15;
+}
+
+.hero-img {
+  width: 100%;
+  max-height: 430px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 30px rgba(56,189,248,0.55));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
 .section-title {
   font-size: 46px;
   margin-bottom: 10px;
 }
 
 .title-line {
-  width: 90px;
-  height: 5px;
+  width: 110px;
+  height: 6px;
   background: #facc15;
   margin: 0 auto 30px;
   border-radius: 10px;
 }
 
 .players-list {
-  max-width: 420px;
+  max-width: 430px;
   margin: 0 auto;
   display: grid;
   gap: 16px;
@@ -77,28 +141,31 @@ section {
 
 .players-list button {
   width: 100%;
-  padding: 20px;
-  font-size: 24px;
-  font-weight: bold;
-  border-radius: 18px;
+  padding: 22px;
+  font-size: 25px;
+  font-weight: 900;
+  border-radius: 20px;
   border: 2px solid #38bdf8;
-  background: #0f172a;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
   color: white;
   cursor: pointer;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.35);
+  transition: 0.25s;
 }
 
 .players-list button:hover {
-  background: #1e293b;
+  transform: scale(1.05);
+  border-color: #facc15;
 }
 
 .copa-card {
-  background: #0f172a;
-  max-width: 360px;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  max-width: 380px;
   margin: 25px auto;
-  padding: 25px;
-  border-radius: 20px;
+  padding: 28px;
+  border-radius: 24px;
   border: 2px solid #22c55e;
+  box-shadow: 0 0 25px rgba(34,197,94,0.25);
 }
 
 .player-page {
@@ -182,18 +249,22 @@ section {
   border-radius: 14px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   h1 {
     font-size: 48px;
   }
 
   nav button {
     width: 100%;
-    max-width: 300px;
+    max-width: 310px;
   }
 
-  .section-title {
-    font-size: 38px;
+  .hero-box {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-text h2 {
+    font-size: 36px;
   }
 }
 </style>
@@ -204,16 +275,25 @@ section {
 <header id="mainHeader">
   <h1>Nelson Cup</h1>
   <nav>
-    <button onclick="showPage('home')">Início</button>
-    <button onclick="showPage('copas')">Copas</button>
-    <button onclick="showPage('jogadores')">Jogadores</button>
+    <button onclick="playClick(); showPage('home')">Início</button>
+    <button onclick="playClick(); showPage('copas')">Copas</button>
+    <button onclick="playClick(); showPage('jogadores')">Jogadores</button>
   </nav>
 </header>
 
-<section id="home">
-  <h2 class="section-title">🏆 Copas de rua de futebol</h2>
-  <div class="title-line"></div>
-  <p>Bem-vindo ao site oficial da Nelson Cup.</p>
+<section id="home" class="hero">
+  <div class="hero-box">
+    <div class="hero-text">
+      <h2>🏆 Bem-vindo à Nelson Cup</h2>
+      <p>
+        Onde cada partida vira história, cada vitória pesa como ouro
+        e cada jogador entra em campo para deixar seu nome marcado.
+      </p>
+      <p><strong>Copas de rua. Rivalidade. Glória. Respeito.</strong></p>
+    </div>
+
+    <img class="hero-img" src="images/IsagiRender.webp" alt="Jogador Nelson Cup">
+  </div>
 </section>
 
 <section id="copas" class="hidden">
@@ -232,17 +312,17 @@ section {
   <div class="title-line"></div>
 
   <div class="players-list">
-    <button onclick="openPlayer('Pedro')">• Pedro</button>
-    <button onclick="openPlayer('Lucca')">• Lucca</button>
-    <button onclick="openPlayer('Gabriel')">• Gabriel</button>
-    <button onclick="openPlayer('Luiz')">• Luiz</button>
-    <button onclick="openPlayer('Ygor')">• Ygor</button>
-    <button onclick="openPlayer('Leandro')">• Leandro</button>
+    <button onclick="playClick(); openPlayer('Pedro')">• Pedro</button>
+    <button onclick="playClick(); openPlayer('Lucca')">• Lucca</button>
+    <button onclick="playClick(); openPlayer('Gabriel')">• Gabriel</button>
+    <button onclick="playClick(); openPlayer('Luiz')">• Luiz</button>
+    <button onclick="playClick(); openPlayer('Ygor')">• Ygor</button>
+    <button onclick="playClick(); openPlayer('Leandro')">• Leandro</button>
   </div>
 </section>
 
 <section id="playerPage" class="hidden player-page">
-  <button class="back-button" onclick="showPage('jogadores')">← Voltar</button>
+  <button class="back-button" onclick="playClick(); showPage('jogadores')">← Voltar</button>
   <div id="playerArea"></div>
 </section>
 
@@ -255,6 +335,21 @@ const players = {
   Ygor:    {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"},
   Leandro: {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"}
 };
+
+function playClick() {
+  const audio = new AudioContext();
+  const osc = audio.createOscillator();
+  const gain = audio.createGain();
+
+  osc.connect(gain);
+  gain.connect(audio.destination);
+
+  osc.frequency.value = 520;
+  gain.gain.value = 0.04;
+
+  osc.start();
+  osc.stop(audio.currentTime + 0.08);
+}
 
 function showPage(page) {
   document.getElementById("home").classList.add("hidden");
