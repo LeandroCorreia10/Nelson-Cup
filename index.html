@@ -75,7 +75,6 @@ section {
     radial-gradient(circle at top left, rgba(34,197,94,0.35), transparent 35%),
     radial-gradient(circle at bottom right, rgba(14,165,233,0.3), transparent 40%),
     #020617;
-  overflow: hidden;
 }
 
 .hero-box {
@@ -195,7 +194,7 @@ section {
 .player-page {
   min-height: 100vh;
   padding: 35px 20px;
-  background: radial-gradient(circle at top, #1e3a8a, #020617 70%);
+  background: radial-gradient(circle at top, #1e3a8a, #020617 75%);
 }
 
 .back-button {
@@ -208,14 +207,19 @@ section {
   cursor: pointer;
 }
 
+.profile-layout {
+  width: min(95vw, 430px);
+  margin: 0 auto;
+}
+
 .player-card {
-  width: min(92vw, 410px);
+  width: 100%;
   margin: 0 auto;
   padding: 25px;
   border-radius: 35px;
   background: linear-gradient(145deg, #b8860b, #ffe082, #d4af37, #fff2a8);
   color: #1f1600;
-  box-shadow: 0 0 35px rgba(250,204,21,0.5);
+  box-shadow: 0 0 35px rgba(250,204,21,0.55);
   border: 4px solid #fff0a6;
   animation: cardAppear 0.4s ease;
 }
@@ -231,13 +235,9 @@ section {
   }
 }
 
-.card-top {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .overall {
+  width: fit-content;
+  margin: 0 auto;
   font-size: 62px;
   font-weight: 900;
   background: rgba(255,255,255,0.45);
@@ -274,47 +274,57 @@ section {
   border-radius: 14px;
 }
 
-.trophy-section {
-  margin-top: 24px;
+.trophies-outside {
+  margin-top: 26px;
   display: grid;
-  gap: 14px;
+  gap: 18px;
 }
 
 .trophy-row {
   display: flex;
   align-items: center;
-  gap: 14px;
-  background: rgba(15, 23, 42, 0.20);
-  border: 2px solid rgba(255,255,255,0.35);
-  border-radius: 18px;
-  padding: 12px;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(15,23,42,0.96), rgba(30,41,59,0.92));
+  border: 2px solid rgba(250,204,21,0.45);
+  border-radius: 24px;
+  padding: 15px;
   text-align: left;
-  box-shadow: inset 0 0 18px rgba(255,255,255,0.15);
+  box-shadow: 0 0 25px rgba(0,0,0,0.35);
+  animation: trophyAppear 0.45s ease;
+}
+
+@keyframes trophyAppear {
+  from {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .trophy-row img {
-  width: 78px;
-  height: 78px;
+  width: 92px;
+  height: 92px;
   object-fit: contain;
-  border-radius: 12px;
-  background: rgba(0,0,0,0.25);
-  padding: 5px;
-}
-
-.trophy-info {
-  flex: 1;
+  border-radius: 16px;
+  background: rgba(0,0,0,0.35);
+  padding: 7px;
+  flex-shrink: 0;
 }
 
 .trophy-info h3 {
-  margin: 0 0 6px;
-  font-size: 20px;
-  color: #1f1600;
+  margin: 0 0 7px;
+  font-size: 21px;
+  color: #facc15;
 }
 
 .trophy-info p {
-  margin: 3px 0;
+  margin: 4px 0;
   font-size: 15px;
   font-weight: bold;
+  color: #e5e7eb;
 }
 
 @media (max-width: 700px) {
@@ -339,9 +349,26 @@ section {
     font-size: 38px;
   }
 
+  .player-photo {
+    width: 155px;
+    height: 155px;
+  }
+
+  .player-name {
+    font-size: 34px;
+  }
+
+  .overall {
+    font-size: 48px;
+  }
+
+  .stats {
+    font-size: 18px;
+  }
+
   .trophy-row img {
-    width: 68px;
-    height: 68px;
+    width: 78px;
+    height: 78px;
   }
 
   .trophy-info h3 {
@@ -349,7 +376,7 @@ section {
   }
 
   .trophy-info p {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 </style>
@@ -369,7 +396,6 @@ section {
 
 <section id="home" class="hero">
   <div class="hero-box">
-
     <div class="hero-text">
       <h2>🏆 Bem-vindo ao Nelson Cup</h2>
 
@@ -387,7 +413,6 @@ section {
     </div>
 
     <img class="hero-img" src="images/IsagiRender.webp" alt="Jogador Nelson Cup">
-
   </div>
 </section>
 
@@ -433,105 +458,84 @@ const players = {
   Pedro: {
     rit:0, fin:0, pas:0, con:0, def:0, fis:0,
     foto:"images/foto.png",
-
     ruaGanhas:0,
     ruaParticipacoes:0,
     ruaTime:"--",
-
     championsGanhas:0,
     championsParticipacoes:0,
     championsTime:"--",
-
     casualGanhas:0
   },
 
   Lucca: {
     rit:0, fin:0, pas:0, con:0, def:0, fis:0,
     foto:"images/17777773382614658375343907720176.jpg",
-
     ruaGanhas:0,
     ruaParticipacoes:0,
     ruaTime:"--",
-
     championsGanhas:0,
     championsParticipacoes:0,
     championsTime:"--",
-
     casualGanhas:0
   },
 
   Gabriel: {
     rit:0, fin:0, pas:0, con:0, def:0, fis:0,
     foto:"images/foto.png",
-
     ruaGanhas:0,
     ruaParticipacoes:0,
     ruaTime:"--",
-
     championsGanhas:0,
     championsParticipacoes:0,
     championsTime:"--",
-
     casualGanhas:0
   },
 
   Luiz: {
     rit:0, fin:0, pas:0, con:0, def:0, fis:0,
     foto:"images/foto.png",
-
     ruaGanhas:0,
     ruaParticipacoes:0,
     ruaTime:"--",
-
     championsGanhas:0,
     championsParticipacoes:0,
     championsTime:"--",
-
     casualGanhas:0
   },
 
   Ygor: {
     rit:0, fin:0, pas:0, con:0, def:0, fis:0,
     foto:"images/foto.png",
-
     ruaGanhas:0,
     ruaParticipacoes:0,
     ruaTime:"--",
-
     championsGanhas:0,
     championsParticipacoes:0,
     championsTime:"--",
-
     casualGanhas:0
   },
 
   Leandro: {
     rit:0, fin:0, pas:0, con:0, def:0, fis:0,
     foto:"images/foto.png",
-
     ruaGanhas:0,
     ruaParticipacoes:0,
     ruaTime:"--",
-
     championsGanhas:0,
     championsParticipacoes:0,
     championsTime:"--",
-
     casualGanhas:0
   },
 
   Heitor: {
     rit:0, fin:0, pas:0, con:0, def:0, fis:0,
     foto:"images/foto.png",
-
     ruaGanhas:0,
     ruaParticipacoes:0,
     ruaTime:"--",
-
     championsGanhas:0,
     championsParticipacoes:0,
     championsTime:"--",
-
     casualGanhas:0
   }
 };
@@ -590,26 +594,26 @@ function openPlayer(name) {
   );
 
   document.getElementById("playerArea").innerHTML = `
-    <div class="player-card">
+    <div class="profile-layout">
 
-      <div class="card-top">
+      <div class="player-card">
         <div class="overall">${String(overall).padStart(2,"0")}</div>
+
+        <img class="player-photo" src="${p.foto}" alt="${name}">
+
+        <div class="player-name">${name}</div>
+
+        <div class="stats">
+          <div class="stat">RIT ${String(p.rit).padStart(2,"0")}</div>
+          <div class="stat">FIN ${String(p.fin).padStart(2,"0")}</div>
+          <div class="stat">PAS ${String(p.pas).padStart(2,"0")}</div>
+          <div class="stat">CON ${String(p.con).padStart(2,"0")}</div>
+          <div class="stat">DEF ${String(p.def).padStart(2,"0")}</div>
+          <div class="stat">FÍS ${String(p.fis).padStart(2,"0")}</div>
+        </div>
       </div>
 
-      <img class="player-photo" src="${p.foto}" alt="${name}">
-
-      <div class="player-name">${name}</div>
-
-      <div class="stats">
-        <div class="stat">RIT ${String(p.rit).padStart(2,"0")}</div>
-        <div class="stat">FIN ${String(p.fin).padStart(2,"0")}</div>
-        <div class="stat">PAS ${String(p.pas).padStart(2,"0")}</div>
-        <div class="stat">CON ${String(p.con).padStart(2,"0")}</div>
-        <div class="stat">DEF ${String(p.def).padStart(2,"0")}</div>
-        <div class="stat">FÍS ${String(p.fis).padStart(2,"0")}</div>
-      </div>
-
-      <div class="trophy-section">
+      <div class="trophies-outside">
 
         <div class="trophy-row">
           <img src="${trophies.rua}" alt="Taça de Rua">
@@ -641,6 +645,7 @@ function openPlayer(name) {
         </div>
 
       </div>
+
     </div>
   `;
 
