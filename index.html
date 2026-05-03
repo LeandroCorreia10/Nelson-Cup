@@ -5,9 +5,7 @@
 <title>Araras Cup</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -58,13 +56,8 @@ nav button:hover {
   background: #facc15;
 }
 
-section {
-  padding: 35px 20px;
-}
-
-.hidden {
-  display: none;
-}
+section { padding: 35px 20px; }
+.hidden { display: none; }
 
 .hero {
   min-height: 72vh;
@@ -351,6 +344,7 @@ section {
   width: 100%;
   margin: 0 auto;
   padding: 25px;
+  padding-top: 62px;
   border-radius: 35px;
   background: linear-gradient(145deg, #b8860b, #ffe082, #d4af37, #fff2a8);
   color: #1f1600;
@@ -381,10 +375,30 @@ section {
     0 0 70px rgba(29,78,216,0.65);
 }
 
+.player-card.special-purple {
+  color: white;
+  box-shadow:
+    0 0 35px rgba(168,85,247,0.85),
+    0 0 80px rgba(126,34,206,0.75);
+}
+
+.player-card.special-white {
+  color: white;
+  animation: miracleShake 0.16s infinite linear, cardAppear 0.4s ease;
+  box-shadow:
+    0 0 35px rgba(255,255,255,0.95),
+    0 0 90px rgba(219,234,254,0.9),
+    0 0 140px rgba(147,197,253,0.55);
+}
+
 .player-card.special-black::before,
 .player-card.special-black::after,
 .player-card.special-blue::before,
-.player-card.special-blue::after {
+.player-card.special-blue::after,
+.player-card.special-purple::before,
+.player-card.special-purple::after,
+.player-card.special-white::before,
+.player-card.special-white::after {
   content: "";
   position: absolute;
   inset: -60px;
@@ -432,6 +446,42 @@ section {
   animation-duration: 12s;
 }
 
+.player-card.special-purple::before {
+  background-image:
+    radial-gradient(circle, rgba(216,180,254,0.95) 0 3px, transparent 4px),
+    radial-gradient(circle, rgba(168,85,247,0.9) 0 2px, transparent 3px);
+  background-size: 46px 46px, 72px 72px;
+  animation-name: purpleParticlesA;
+  animation-duration: 7s;
+}
+
+.player-card.special-purple::after {
+  background-image:
+    radial-gradient(circle, rgba(126,34,206,0.85) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(192,132,252,0.75) 0 2px, transparent 3px);
+  background-size: 58px 58px, 90px 90px;
+  animation-name: purpleParticlesB;
+  animation-duration: 10s;
+}
+
+.player-card.special-white::before {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.98) 0 3px, transparent 4px),
+    radial-gradient(circle, rgba(219,234,254,0.95) 0 2px, transparent 3px);
+  background-size: 40px 40px, 66px 66px;
+  animation-name: whiteParticlesA;
+  animation-duration: 5s;
+}
+
+.player-card.special-white::after {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.85) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(147,197,253,0.75) 0 2px, transparent 3px);
+  background-size: 55px 55px, 88px 88px;
+  animation-name: whiteParticlesB;
+  animation-duration: 8s;
+}
+
 @keyframes blackParticlesA {
   from { background-position: 0 0, 0 0; }
   to { background-position: 46px -46px, 72px -72px; }
@@ -452,6 +502,26 @@ section {
   to { background-position: -58px -58px, -90px -90px; }
 }
 
+@keyframes purpleParticlesA {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 46px -46px, 72px -72px; }
+}
+
+@keyframes purpleParticlesB {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: -58px -58px, -90px -90px; }
+}
+
+@keyframes whiteParticlesA {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 40px -40px, 66px -66px; }
+}
+
+@keyframes whiteParticlesB {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: -55px -55px, -88px -88px; }
+}
+
 .player-card > * {
   position: relative;
   z-index: 2;
@@ -467,6 +537,101 @@ section {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+@keyframes miracleShake {
+  0% { transform: translate(0,0) rotate(0deg); }
+  25% { transform: translate(1px,-1px) rotate(-0.3deg); }
+  50% { transform: translate(-1px,1px) rotate(0.3deg); }
+  75% { transform: translate(1px,1px) rotate(-0.2deg); }
+  100% { transform: translate(0,0) rotate(0deg); }
+}
+
+.star-layer {
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.mvp-star {
+  font-size: 32px;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(250,204,21,0.8));
+}
+
+.star-gold .mvp-star {
+  color: #facc15;
+  text-shadow: 0 0 12px rgba(250,204,21,0.9);
+}
+
+.star-black .mvp-star {
+  color: #111827;
+  text-shadow:
+    0 0 8px rgba(0,0,0,1),
+    0 0 14px rgba(75,85,99,0.9);
+}
+
+.star-blue .mvp-star {
+  color: #38bdf8;
+  animation: starPulseBlue 1s infinite alternate ease-in-out;
+  text-shadow:
+    0 0 10px rgba(56,189,248,1),
+    0 0 20px rgba(37,99,235,0.9);
+}
+
+.star-red .mvp-star {
+  color: #ef4444;
+  animation: starShakeRed 0.16s infinite linear;
+  text-shadow:
+    0 0 10px rgba(239,68,68,1),
+    0 0 24px rgba(185,28,28,0.9);
+}
+
+.star-purple .mvp-star {
+  color: #a855f7;
+  animation: starShakePurple 0.18s infinite linear;
+  text-shadow:
+    0 0 10px rgba(168,85,247,1),
+    0 0 24px rgba(126,34,206,1);
+}
+
+.star-white .mvp-star {
+  color: #ffffff;
+  animation: starShakeWhite 0.13s infinite linear;
+  text-shadow:
+    0 0 10px rgba(255,255,255,1),
+    0 0 26px rgba(219,234,254,1),
+    0 0 42px rgba(147,197,253,0.9);
+}
+
+@keyframes starPulseBlue {
+  from { transform: scale(1); }
+  to { transform: scale(1.14); }
+}
+
+@keyframes starShakeRed {
+  0% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(1px,-1px) rotate(6deg); }
+  100% { transform: translate(0,0) rotate(0deg); }
+}
+
+@keyframes starShakePurple {
+  0% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(-1px,1px) rotate(-6deg); }
+  100% { transform: translate(0,0) rotate(0deg); }
+}
+
+@keyframes starShakeWhite {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(1px,-1px) scale(1.12); }
+  100% { transform: translate(0,0) scale(1); }
 }
 
 .overall {
@@ -493,6 +658,13 @@ section {
   box-shadow:
     0 0 22px rgba(147,197,253,0.9),
     0 0 45px rgba(37,99,235,0.8);
+}
+
+.special-white .player-photo {
+  animation: bluePhotoVibration 0.18s infinite linear;
+  box-shadow:
+    0 0 28px rgba(255,255,255,1),
+    0 0 60px rgba(219,234,254,0.9);
 }
 
 @keyframes bluePhotoVibration {
@@ -524,16 +696,13 @@ section {
   border-radius: 14px;
 }
 
-.special-black .stat {
-  background: rgba(255,255,255,0.12);
+.special-black .stat,
+.special-blue .stat,
+.special-purple .stat,
+.special-white .stat {
+  background: rgba(255,255,255,0.18);
   color: white;
-  border: 1px solid rgba(255,255,255,0.12);
-}
-
-.special-blue .stat {
-  background: rgba(255,255,255,0.22);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.18);
 }
 
 .trophies-outside {
@@ -591,46 +760,21 @@ section {
 }
 
 @media (max-width: 700px) {
-  h1 {
-    font-size: 48px;
-  }
+  h1 { font-size: 48px; }
 
   nav button {
     width: 100%;
     max-width: 310px;
   }
 
-  .hero-box {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-text h2 {
-    font-size: 36px;
-  }
-
-  .section-title {
-    font-size: 38px;
-  }
-
-  .mvp-title {
-    font-size: 36px;
-  }
-
-  .mvp-rank {
-    font-size: 24px;
-  }
-
-  .mvp-name {
-    font-size: 34px;
-  }
-
-  .mvp-extra span {
-    font-size: 21px;
-  }
-
-  .mvp-extra p {
-    font-size: 16px;
-  }
+  .hero-box { grid-template-columns: 1fr; }
+  .hero-text h2 { font-size: 36px; }
+  .section-title { font-size: 38px; }
+  .mvp-title { font-size: 36px; }
+  .mvp-rank { font-size: 24px; }
+  .mvp-name { font-size: 34px; }
+  .mvp-extra span { font-size: 21px; }
+  .mvp-extra p { font-size: 16px; }
 
   .mvp-section::before,
   .mvp-section::after {
@@ -642,29 +786,20 @@ section {
     height: 155px;
   }
 
-  .player-name {
-    font-size: 34px;
-  }
-
-  .overall {
-    font-size: 48px;
-  }
-
-  .stats {
-    font-size: 18px;
-  }
+  .player-name { font-size: 34px; }
+  .overall { font-size: 48px; }
+  .stats { font-size: 18px; }
 
   .trophy-row img {
     width: 78px;
     height: 78px;
   }
 
-  .trophy-info h3 {
-    font-size: 18px;
-  }
+  .trophy-info h3 { font-size: 18px; }
+  .trophy-info p { font-size: 13px; }
 
-  .trophy-info p {
-    font-size: 13px;
+  .mvp-star {
+    font-size: 26px;
   }
 }
 </style>
@@ -685,7 +820,6 @@ section {
 
 <section id="home" class="hero">
   <div class="hero-box">
-
     <div class="hero-text">
       <h2>🏆 Bem-vindo ao Araras Cup</h2>
 
@@ -703,7 +837,6 @@ section {
     </div>
 
     <img class="hero-img" src="images/bola-de-futebol-em-ilustracao-vetorial-de-design-de-fogo_333603-769.png" alt="Jogador Araras Cup">
-
   </div>
 </section>
 
@@ -733,7 +866,6 @@ section {
 
 <section id="mvp" class="hidden mvp-section">
   <div class="mvp-card">
-
     <div class="mvp-rank">TOP 1</div>
 
     <h2 class="mvp-title" id="top1MvpScore">🔥 MVP 000 🔥</h2>
@@ -757,7 +889,6 @@ section {
         <p id="top3MvpName">Ainda ninguém</p>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -784,41 +915,32 @@ const players = {
   Pedro: {
     rit:0, fin:0, pas:0, con:0, def:0, fis:0,
     foto:"images/foto.png",
-
     ruaGanhas:0,
     ruaParticipacoes:0,
-
     championsGanhas:0,
     championsParticipacoes:0,
-
     casualGanhas:0,
     casualParticipacoes:0
   },
 
   Lucca: {
-    rit:0, fin:0, pas:0, con:0, def:0, fis:0,
+    rit:90, fin:90, pas:90, con:90, def:90, fis:90,
     foto:"images/17777773382614658375343907720176.jpg",
-
-    ruaGanhas:0,
+    ruaGanhas:10,
     ruaParticipacoes:0,
-
-    championsGanhas:0,
+    championsGanhas:5,
     championsParticipacoes:0,
-
-    casualGanhas:0,
+    casualGanhas:10,
     casualParticipacoes:0
   },
 
   Gabriel: {
-    rit:0, fin:0, pas:0, con:0, def:0, fis:0,
+    rit:85, fin:85, pas:85, con:85, def:85, fis:85,
     foto:"images/foto.png",
-
-    ruaGanhas:0,
+    ruaGanhas:2,
     ruaParticipacoes:0,
-
     championsGanhas:0,
     championsParticipacoes:0,
-
     casualGanhas:0,
     casualParticipacoes:0
   },
@@ -826,13 +948,10 @@ const players = {
   Luiz: {
     rit:0, fin:0, pas:0, con:0, def:0, fis:0,
     foto:"images/foto.png",
-
     ruaGanhas:0,
     ruaParticipacoes:0,
-
     championsGanhas:0,
     championsParticipacoes:0,
-
     casualGanhas:0,
     casualParticipacoes:0
   },
@@ -840,13 +959,10 @@ const players = {
   Ygor: {
     rit:0, fin:0, pas:0, con:0, def:0, fis:0,
     foto:"images/foto.png",
-
     ruaGanhas:0,
     ruaParticipacoes:0,
-
     championsGanhas:0,
     championsParticipacoes:0,
-
     casualGanhas:0,
     casualParticipacoes:0
   },
@@ -854,13 +970,10 @@ const players = {
   Leandro: {
     rit:0, fin:0, pas:0, con:0, def:0, fis:0,
     foto:"images/foto.png",
-
     ruaGanhas:0,
     ruaParticipacoes:0,
-
     championsGanhas:0,
     championsParticipacoes:0,
-
     casualGanhas:0,
     casualParticipacoes:0
   },
@@ -868,13 +981,10 @@ const players = {
   Heitor: {
     rit:0, fin:0, pas:0, con:0, def:0, fis:0,
     foto:"images/foto.png",
-
     ruaGanhas:0,
     ruaParticipacoes:0,
-
     championsGanhas:0,
     championsParticipacoes:0,
-
     casualGanhas:0,
     casualParticipacoes:0
   }
@@ -927,6 +1037,10 @@ function calcularMVP(p) {
   return Math.round((pontosCopas / 3) * overall);
 }
 
+function getMVPByName(name) {
+  return calcularMVP(players[name]);
+}
+
 function getRankingMVP() {
   const ranking = [];
 
@@ -947,6 +1061,60 @@ function getRankingMVP() {
   ranking.sort((a, b) => b.mvp - a.mvp);
 
   return ranking;
+}
+
+function getStarInfo(mvp) {
+  if (mvp >= 100000) {
+    return { count: 1, type: "white" };
+  }
+
+  if (mvp >= 11000) {
+    if (mvp >= 80000) return { count: 5, type: "purple" };
+    if (mvp >= 60000) return { count: 4, type: "purple" };
+    if (mvp >= 40000) return { count: 3, type: "purple" };
+    if (mvp >= 20000) return { count: 2, type: "purple" };
+    return { count: 1, type: "purple" };
+  }
+
+  if (mvp >= 6000) {
+    const count = Math.min(5, Math.floor((mvp - 6000) / 1000) + 1);
+    return { count: count, type: "red" };
+  }
+
+  if (mvp >= 1000) {
+    const count = Math.min(5, Math.floor(mvp / 1000));
+    return { count: count, type: "normal" };
+  }
+
+  return { count: 0, type: "none" };
+}
+
+function getStarClass(starInfo, cardClass) {
+  if (starInfo.type === "white") return "star-white";
+  if (starInfo.type === "purple") return "star-purple";
+  if (starInfo.type === "red") return "star-red";
+
+  if (cardClass.includes("special-blue")) return "star-blue";
+  if (cardClass.includes("special-black")) return "star-black";
+
+  return "star-gold";
+}
+
+function createStarsHTML(mvp, cardClass) {
+  const starInfo = getStarInfo(mvp);
+
+  if (starInfo.count <= 0) {
+    return "";
+  }
+
+  const starClass = getStarClass(starInfo, cardClass);
+  let stars = "";
+
+  for (let i = 0; i < starInfo.count; i++) {
+    stars += `<span class="mvp-star">★</span>`;
+  }
+
+  return `<div class="star-layer ${starClass}">${stars}</div>`;
 }
 
 function atualizarMVP() {
@@ -1058,6 +1226,32 @@ function playOpenCardSound() {
   osc.stop(audio.currentTime + 0.22);
 }
 
+function playMiracleSound() {
+  const audio = new AudioContext();
+
+  const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99];
+
+  notes.forEach((freq, i) => {
+    const osc = audio.createOscillator();
+    const gain = audio.createGain();
+
+    osc.type = "sine";
+    osc.frequency.value = freq;
+
+    osc.connect(gain);
+    gain.connect(audio.destination);
+
+    const start = audio.currentTime + i * 0.18;
+
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(0.035, start + 0.18);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + 3.2);
+
+    osc.start(start);
+    osc.stop(start + 3.3);
+  });
+}
+
 function showPage(page) {
   document.getElementById("home").classList.add("hidden");
   document.getElementById("copas").classList.add("hidden");
@@ -1075,7 +1269,15 @@ function showPage(page) {
   }
 }
 
-function getCardClass(overall) {
+function getCardClass(overall, mvp) {
+  if (mvp >= 100000) {
+    return "special-white";
+  }
+
+  if (mvp >= 11000) {
+    return "special-purple";
+  }
+
   if (overall >= 90) {
     return "special-blue";
   }
@@ -1092,12 +1294,20 @@ function openPlayer(name) {
 
   const p = players[name];
   const overall = getOverall(p);
-  const cardClass = getCardClass(overall);
+  const mvp = getMVPByName(name);
+  const cardClass = getCardClass(overall, mvp);
+  const starsHTML = createStarsHTML(mvp, cardClass);
+
+  if (mvp >= 100000) {
+    playMiracleSound();
+  }
 
   document.getElementById("playerArea").innerHTML = `
     <div class="profile-layout">
 
       <div class="player-card ${cardClass}">
+        ${starsHTML}
+
         <div class="overall">${String(overall).padStart(2,"0")}</div>
 
         <img class="player-photo" src="${p.foto}" alt="${name}">
@@ -1156,4 +1366,5 @@ atualizarMVP();
 </script>
 
 </body>
-</html>
+  </html>
+  
