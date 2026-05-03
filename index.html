@@ -1,14 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+  <meta charset="UTF-8">
   <title>Nelson Cup</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 30px;
+      background: linear-gradient(90deg, #22c55e, #0ea5e9);
+    }
+
+    h1 {
+      font-size: 60px;
+      margin: 0;
+    }
+
+    nav {
+      margin-top: 15px;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 40px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 10px;
+      display: inline-block;
+      width: 250px;
+    }
+
+  </style>
 </head>
 
-<body style="background:#0f172a; color:white; text-align:center; font-family:Arial;">
+<body>
 
-<h1 style="font-size:60px;">Nelson Cup</h1>
+<header>
+  <h1>Nelson Cup</h1>
+  <nav>
+    <a href="#">Início</a>
+    <a href="#">Jogadores</a>
+    <a href="#">Copas</a>
+  </nav>
+</header>
 
-<p>🏆 Copas de rua de futebol</p>
+<section>
+  <h2>🏆 Últimas Copas</h2>
+
+  <div class="card">
+    <h3>Copa 2025</h3>
+    <p>Campeão: João</p>
+  </div>
+
+  <div class="card">
+    <h3>Copa 2024</h3>
+    <p>Campeão: Pedro</p>
+  </div>
+
+</section>
 
 </body>
 </html>
