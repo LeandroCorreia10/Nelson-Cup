@@ -258,6 +258,15 @@ section {
   animation: cardAppear 0.45s ease;
 }
 
+.mvp-rank {
+  font-size: 28px;
+  font-weight: 900;
+  color: #facc15;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 14px rgba(250,204,21,0.65);
+}
+
 .mvp-title {
   font-size: 46px;
   margin: 0 0 28px;
@@ -288,6 +297,34 @@ section {
   font-size: 19px;
   line-height: 1.6;
   color: #e5e7eb;
+}
+
+.mvp-extra-list {
+  margin-top: 45px;
+  display: grid;
+  gap: 18px;
+}
+
+.mvp-extra {
+  background: rgba(15,23,42,0.82);
+  border: 2px solid rgba(250,204,21,0.45);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.35);
+}
+
+.mvp-extra span {
+  display: block;
+  color: #facc15;
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.mvp-extra p {
+  margin: 0;
+  color: #e5e7eb;
+  font-size: 18px;
 }
 
 .player-page {
@@ -454,8 +491,20 @@ section {
     font-size: 36px;
   }
 
+  .mvp-rank {
+    font-size: 24px;
+  }
+
   .mvp-name {
     font-size: 34px;
+  }
+
+  .mvp-extra span {
+    font-size: 21px;
+  }
+
+  .mvp-extra p {
+    font-size: 16px;
   }
 
   .mvp-section::before,
@@ -559,15 +608,31 @@ section {
 
 <section id="mvp" class="hidden mvp-section">
   <div class="mvp-card">
-    <h2 class="mvp-title">🔥 MVP Player 🔥</h2>
 
-    <img class="mvp-photo" src="images/images (33).jpeg" alt="MVP Player">
+    <div class="mvp-rank">TOP 1</div>
+
+    <h2 class="mvp-title">🔥 MVP 000 🔥</h2>
+
+    <img class="mvp-photo" src="images/foto.png" alt="MVP Player">
 
     <h3 class="mvp-name">Ainda ninguém</h3>
 
     <p class="mvp-description">
       Sem descrição
     </p>
+
+    <div class="mvp-extra-list">
+      <div class="mvp-extra">
+        <span>TOP 2 MVP</span>
+        <p>Ainda ninguém</p>
+      </div>
+
+      <div class="mvp-extra">
+        <span>TOP 3 MVP</span>
+        <p>Ainda ninguém</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
