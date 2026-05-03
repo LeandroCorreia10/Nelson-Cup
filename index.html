@@ -787,13 +787,12 @@ const players = {
 
     ruaGanhas:0,
     ruaParticipacoes:0,
-    ruaTime:"--",
 
     championsGanhas:0,
     championsParticipacoes:0,
-    championsTime:"--",
 
-    casualGanhas:0
+    casualGanhas:0,
+    casualParticipacoes:0
   },
 
   Lucca: {
@@ -802,13 +801,12 @@ const players = {
 
     ruaGanhas:10,
     ruaParticipacoes:0,
-    ruaTime:"--",
 
     championsGanhas:5,
     championsParticipacoes:0,
-    championsTime:"--",
 
-    casualGanhas:10
+    casualGanhas:10,
+    casualParticipacoes:0
   },
 
   Gabriel: {
@@ -817,13 +815,12 @@ const players = {
 
     ruaGanhas:2,
     ruaParticipacoes:0,
-    ruaTime:"--",
 
     championsGanhas:0,
     championsParticipacoes:0,
-    championsTime:"--",
 
-    casualGanhas:0
+    casualGanhas:0,
+    casualParticipacoes:0
   },
 
   Luiz: {
@@ -832,13 +829,12 @@ const players = {
 
     ruaGanhas:0,
     ruaParticipacoes:0,
-    ruaTime:"--",
 
     championsGanhas:0,
     championsParticipacoes:0,
-    championsTime:"--",
 
-    casualGanhas:0
+    casualGanhas:0,
+    casualParticipacoes:0
   },
 
   Ygor: {
@@ -847,13 +843,12 @@ const players = {
 
     ruaGanhas:0,
     ruaParticipacoes:0,
-    ruaTime:"--",
 
     championsGanhas:0,
     championsParticipacoes:0,
-    championsTime:"--",
 
-    casualGanhas:0
+    casualGanhas:0,
+    casualParticipacoes:0
   },
 
   Leandro: {
@@ -862,13 +857,12 @@ const players = {
 
     ruaGanhas:0,
     ruaParticipacoes:0,
-    ruaTime:"--",
 
     championsGanhas:0,
     championsParticipacoes:0,
-    championsTime:"--",
 
-    casualGanhas:0
+    casualGanhas:0,
+    casualParticipacoes:0
   },
 
   Heitor: {
@@ -877,13 +871,12 @@ const players = {
 
     ruaGanhas:0,
     ruaParticipacoes:0,
-    ruaTime:"--",
 
     championsGanhas:0,
     championsParticipacoes:0,
-    championsTime:"--",
 
-    casualGanhas:0
+    casualGanhas:0,
+    casualParticipacoes:0
   }
 };
 
@@ -1129,7 +1122,6 @@ function openPlayer(name) {
             <h3>Taça de Rua</h3>
             <p>Copas ganhas: ${p.ruaGanhas}</p>
             <p>Participações: ${p.ruaParticipacoes}</p>
-            <p>Time: ${p.ruaTime}</p>
           </div>
         </div>
 
@@ -1139,7 +1131,6 @@ function openPlayer(name) {
             <h3>Taça Champions</h3>
             <p>Copas ganhas: ${p.championsGanhas}</p>
             <p>Participações: ${p.championsParticipacoes}</p>
-            <p>Time: ${p.championsTime}</p>
           </div>
         </div>
 
@@ -1148,7 +1139,7 @@ function openPlayer(name) {
           <div class="trophy-info">
             <h3>Taça Casual</h3>
             <p>Copas ganhas: ${p.casualGanhas}</p>
-            <p>Modalidade: individual</p>
+            <p>Participações: ${p.casualParticipacoes}</p>
           </div>
         </div>
 
