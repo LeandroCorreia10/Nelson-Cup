@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Nelson Cup</title>
+<title>Araras Cup</title>
 
 <style>
 * {
@@ -267,6 +267,7 @@ section {
   margin: 0 0 28px;
   color: #facc15;
   text-shadow: 0 0 18px rgba(250,204,21,0.45);
+  word-break: break-word;
 }
 
 .mvp-photo {
@@ -314,6 +315,7 @@ section {
   font-size: 24px;
   font-weight: 900;
   margin-bottom: 8px;
+  word-break: break-word;
 }
 
 .mvp-extra p {
@@ -671,7 +673,7 @@ section {
 <body>
 
 <header id="mainHeader">
-  <h1>Nelson Cup</h1>
+  <h1>Araras Cup</h1>
 
   <nav>
     <button onclick="playClick(); showPage('home')">Início</button>
@@ -685,7 +687,7 @@ section {
   <div class="hero-box">
 
     <div class="hero-text">
-      <h2>🏆 Bem-vindo ao Nelson Cup</h2>
+      <h2>🏆 Bem-vindo ao Araras Cup</h2>
 
       <p class="sub">
         Um site para marcar partidas e desempenhos atléticos.
@@ -700,7 +702,7 @@ section {
       </button>
     </div>
 
-    <img class="hero-img" src="images/bola-de-futebol-em-ilustracao-vetorial-de-design-de-fogo_333603-769.png" alt="Jogador Nelson Cup">
+    <img class="hero-img" src="images/bola-de-futebol-em-ilustracao-vetorial-de-design-de-fogo_333603-769.png" alt="Jogador Araras Cup">
 
   </div>
 </section>
@@ -741,7 +743,7 @@ section {
     <h3 class="mvp-name" id="top1MvpName">Ainda ninguém</h3>
 
     <p class="mvp-description" id="top1MvpDescription">
-      Ranking calculado automaticamente com base nas copas ganhas e no overall.
+      Sem dados suficientes.
     </p>
 
     <div class="mvp-extra-list">
@@ -765,6 +767,8 @@ section {
 </section>
 
 <script>
+const DEFAULT_MVP_IMAGE = "images/foto.png";
+
 const trophies = {
   rua: "images/file_00000000d18071f5987f16da6eb05069.png",
   champions: "images/file_00000000ad10720eab9dfb8000ba0e53.png",
@@ -887,6 +891,32 @@ function atualizarCopas() {
   document.getElementById("copasTextoBox").innerText = copasTexto;
 }
 
+function formatarNumero(num) {
+  if (num < 1000) {
+    return String(num).padStart(3, "0");
+  }
+
+  const unidades = ["K", "M", "B", "T", "Q"];
+  let index = -1;
+
+  while (num >= 1000 && index < unidades.length - 1) {
+    num = num / 1000;
+    index++;
+  }
+
+  let casas = 1;
+
+  if (num >= 100) {
+    casas = 0;
+  } else if (num >= 10) {
+    casas = 1;
+  } else {
+    casas = 2;
+  }
+
+  return num.toFixed(casas).replace(/\.0+$|(\.\d*[1-9])0+$/, "$1") + unidades[index];
+}
+
 function getOverall(p) {
   return Math.round(
     (p.rit + p.fin + p.pas + p.con + p.def + p.fis) / 6
@@ -933,31 +963,50 @@ function atualizarMVP() {
   const top2 = ranking[1];
   const top3 = ranking[2];
 
-  if (top1) {
-    document.getElementById("top1MvpScore").innerText =
-      "🔥 MVP " + String(top1.mvp).padStart(3, "0") + " 🔥";
+  if (!top1 || top1.mvp === 0) {
+    document.getElementById("top1MvpScore").innerText = "🔥 MVP 000 🔥";
+    document.getElementById("top1MvpName").innerText = "Ainda ninguém";
+    document.getElementById("top1MvpPhoto").src = DEFAULT_MVP_IMAGE;
+    document.getElementById("top1MvpDescription").innerText = "Sem dados suficientes.";
 
-    document.getElementById("top1MvpName").innerText = top1.nome;
-    document.getElementById("top1MvpPhoto").src = top1.foto;
+    document.getElementById("top2MvpScore").innerText = "TOP 2 MVP 000";
+    document.getElementById("top2MvpName").innerText = "Ainda ninguém";
 
-    document.getElementById("top1MvpDescription").innerText =
-      "Overall: " + top1.overall +
-      " | Rua: " + top1.ruaGanhas +
-      " | Champions: " + top1.championsGanhas +
-      " | Casual: " + top1.casualGanhas;
+    document.getElementById("top3MvpScore").innerText = "TOP 3 MVP 000";
+    document.getElementById("top3MvpName").innerText = "Ainda ninguém";
+
+    return;
   }
 
-  if (top2) {
+  document.getElementById("top1MvpScore").innerText =
+    "🔥 MVP " + formatarNumero(top1.mvp) + " 🔥";
+
+  document.getElementById("top1MvpName").innerText = top1.nome;
+  document.getElementById("top1MvpPhoto").src = top1.foto;
+
+  document.getElementById("top1MvpDescription").innerText =
+    "Overall: " + top1.overall +
+    " | Rua: " + top1.ruaGanhas +
+    " | Champions: " + top1.championsGanhas +
+    " | Casual: " + top1.casualGanhas;
+
+  if (!top2 || top2.mvp === 0) {
+    document.getElementById("top2MvpScore").innerText = "TOP 2 MVP 000";
+    document.getElementById("top2MvpName").innerText = "Ainda ninguém";
+  } else {
     document.getElementById("top2MvpScore").innerText =
-      "TOP 2 MVP " + String(top2.mvp).padStart(3, "0");
+      "TOP 2 MVP " + formatarNumero(top2.mvp);
 
     document.getElementById("top2MvpName").innerText =
       top2.nome + " | Overall " + top2.overall;
   }
 
-  if (top3) {
+  if (!top3 || top3.mvp === 0) {
+    document.getElementById("top3MvpScore").innerText = "TOP 3 MVP 000";
+    document.getElementById("top3MvpName").innerText = "Ainda ninguém";
+  } else {
     document.getElementById("top3MvpScore").innerText =
-      "TOP 3 MVP " + String(top3.mvp).padStart(3, "0");
+      "TOP 3 MVP " + formatarNumero(top3.mvp);
 
     document.getElementById("top3MvpName").innerText =
       top3.nome + " | Overall " + top3.overall;
