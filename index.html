@@ -5,7 +5,9 @@
 <title>Nelson Cup</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -28,6 +30,7 @@ h1 {
   font-size: 58px;
   margin: 0 0 25px;
   letter-spacing: 3px;
+  text-shadow: 0 0 18px rgba(255,255,255,0.35);
 }
 
 nav {
@@ -41,11 +44,12 @@ nav button {
   font-size: 22px;
   padding: 18px 34px;
   border-radius: 20px;
-  border: 2px solid white;
+  border: 2px solid rgba(255,255,255,0.85);
   font-weight: 900;
-  background: linear-gradient(135deg, white, #dbeafe);
+  background: linear-gradient(135deg, #ffffff, #dbeafe);
   color: #020617;
   cursor: pointer;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.35);
   transition: 0.25s;
 }
 
@@ -71,6 +75,7 @@ section {
     radial-gradient(circle at top left, rgba(34,197,94,0.35), transparent 35%),
     radial-gradient(circle at bottom right, rgba(14,165,233,0.3), transparent 40%),
     #020617;
+  overflow: hidden;
 }
 
 .hero-box {
@@ -83,6 +88,7 @@ section {
   border: 2px solid rgba(250,204,21,0.45);
   border-radius: 28px;
   padding: 30px;
+  box-shadow: 0 0 45px rgba(250,204,21,0.15);
 }
 
 .hero-text h2 {
@@ -93,12 +99,16 @@ section {
 .sub {
   font-size: 21px;
   color: #cbd5f5;
+  margin-top: 14px;
+  line-height: 1.5;
 }
 
 .highlight {
   font-size: 22px;
   font-weight: bold;
   color: #facc15;
+  margin-top: 18px;
+  letter-spacing: 1px;
 }
 
 .cta {
@@ -111,6 +121,13 @@ section {
   background: linear-gradient(135deg, #22c55e, #0ea5e9);
   color: white;
   cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  transition: 0.3s;
+}
+
+.cta:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #4ade80, #38bdf8);
 }
 
 .hero-img {
@@ -146,6 +163,7 @@ section {
   padding: 28px;
   border-radius: 24px;
   border: 2px solid #22c55e;
+  box-shadow: 0 0 25px rgba(34,197,94,0.25);
 }
 
 .players-list {
@@ -165,6 +183,13 @@ section {
   background: linear-gradient(135deg, #0f172a, #1e293b);
   color: white;
   cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.35);
+  transition: 0.25s;
+}
+
+.players-list button:hover {
+  transform: scale(1.05);
+  border-color: #facc15;
 }
 
 .player-page {
@@ -184,8 +209,7 @@ section {
 }
 
 .player-card {
-  width: min(92vw, 390px);
-  min-height: 600px;
+  width: min(92vw, 410px);
   margin: 0 auto;
   padding: 25px;
   border-radius: 35px;
@@ -193,38 +217,40 @@ section {
   color: #1f1600;
   box-shadow: 0 0 35px rgba(250,204,21,0.5);
   border: 4px solid #fff0a6;
+  animation: cardAppear 0.4s ease;
+}
+
+@keyframes cardAppear {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .card-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
 .overall {
-  font-size: 58px;
+  font-size: 62px;
   font-weight: 900;
-}
-
-.trophy-box {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 28px;
-  font-weight: 900;
-}
-
-.trophy-box img {
-  width: 42px;
-  height: 42px;
+  background: rgba(255,255,255,0.45);
+  padding: 8px 22px;
+  border-radius: 20px;
 }
 
 .player-photo {
-  width: 210px;
-  height: 210px;
+  width: 215px;
+  height: 215px;
   object-fit: cover;
   border-radius: 20px;
-  margin-top: 15px;
+  margin-top: 18px;
   border: 4px solid rgba(255,255,255,0.7);
 }
 
@@ -248,17 +274,83 @@ section {
   border-radius: 14px;
 }
 
+.trophy-section {
+  margin-top: 24px;
+  display: grid;
+  gap: 14px;
+}
+
+.trophy-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(15, 23, 42, 0.20);
+  border: 2px solid rgba(255,255,255,0.35);
+  border-radius: 18px;
+  padding: 12px;
+  text-align: left;
+  box-shadow: inset 0 0 18px rgba(255,255,255,0.15);
+}
+
+.trophy-row img {
+  width: 78px;
+  height: 78px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.25);
+  padding: 5px;
+}
+
+.trophy-info {
+  flex: 1;
+}
+
+.trophy-info h3 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  color: #1f1600;
+}
+
+.trophy-info p {
+  margin: 3px 0;
+  font-size: 15px;
+  font-weight: bold;
+}
+
 @media (max-width: 700px) {
-  h1 { font-size: 48px; }
+  h1 {
+    font-size: 48px;
+  }
 
   nav button {
     width: 100%;
     max-width: 310px;
   }
 
-  .hero-box { grid-template-columns: 1fr; }
+  .hero-box {
+    grid-template-columns: 1fr;
+  }
 
-  .hero-text h2 { font-size: 36px; }
+  .hero-text h2 {
+    font-size: 36px;
+  }
+
+  .section-title {
+    font-size: 38px;
+  }
+
+  .trophy-row img {
+    width: 68px;
+    height: 68px;
+  }
+
+  .trophy-info h3 {
+    font-size: 18px;
+  }
+
+  .trophy-info p {
+    font-size: 14px;
+  }
 }
 </style>
 </head>
@@ -277,6 +369,7 @@ section {
 
 <section id="home" class="hero">
   <div class="hero-box">
+
     <div class="hero-text">
       <h2>🏆 Bem-vindo ao Nelson Cup</h2>
 
@@ -294,6 +387,7 @@ section {
     </div>
 
     <img class="hero-img" src="images/IsagiRender.webp" alt="Jogador Nelson Cup">
+
   </div>
 </section>
 
@@ -329,14 +423,117 @@ section {
 </section>
 
 <script>
+const trophies = {
+  rua: "images/file_00000000d18071f5987f16da6eb05069.png",
+  champions: "images/file_00000000ad10720eab9dfb8000ba0e53.png",
+  casual: "images/file_0000000091a871f5a486a80138abd116.png"
+};
+
 const players = {
-  Pedro:   {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"},
-  Lucca:   {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/17777773382614658375343907720176.jpg"},
-  Gabriel: {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"},
-  Luiz:    {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"},
-  Ygor:    {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"},
-  Leandro: {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"},
-  Heitor:  {rit:0, fin:0, pas:0, con:0, def:0, fis:0, copas:0, foto:"images/foto.png"}
+  Pedro: {
+    rit:0, fin:0, pas:0, con:0, def:0, fis:0,
+    foto:"images/foto.png",
+
+    ruaGanhas:0,
+    ruaParticipacoes:0,
+    ruaTime:"--",
+
+    championsGanhas:0,
+    championsParticipacoes:0,
+    championsTime:"--",
+
+    casualGanhas:0
+  },
+
+  Lucca: {
+    rit:0, fin:0, pas:0, con:0, def:0, fis:0,
+    foto:"images/17777773382614658375343907720176.jpg",
+
+    ruaGanhas:0,
+    ruaParticipacoes:0,
+    ruaTime:"--",
+
+    championsGanhas:0,
+    championsParticipacoes:0,
+    championsTime:"--",
+
+    casualGanhas:0
+  },
+
+  Gabriel: {
+    rit:0, fin:0, pas:0, con:0, def:0, fis:0,
+    foto:"images/foto.png",
+
+    ruaGanhas:0,
+    ruaParticipacoes:0,
+    ruaTime:"--",
+
+    championsGanhas:0,
+    championsParticipacoes:0,
+    championsTime:"--",
+
+    casualGanhas:0
+  },
+
+  Luiz: {
+    rit:0, fin:0, pas:0, con:0, def:0, fis:0,
+    foto:"images/foto.png",
+
+    ruaGanhas:0,
+    ruaParticipacoes:0,
+    ruaTime:"--",
+
+    championsGanhas:0,
+    championsParticipacoes:0,
+    championsTime:"--",
+
+    casualGanhas:0
+  },
+
+  Ygor: {
+    rit:0, fin:0, pas:0, con:0, def:0, fis:0,
+    foto:"images/foto.png",
+
+    ruaGanhas:0,
+    ruaParticipacoes:0,
+    ruaTime:"--",
+
+    championsGanhas:0,
+    championsParticipacoes:0,
+    championsTime:"--",
+
+    casualGanhas:0
+  },
+
+  Leandro: {
+    rit:0, fin:0, pas:0, con:0, def:0, fis:0,
+    foto:"images/foto.png",
+
+    ruaGanhas:0,
+    ruaParticipacoes:0,
+    ruaTime:"--",
+
+    championsGanhas:0,
+    championsParticipacoes:0,
+    championsTime:"--",
+
+    casualGanhas:0
+  },
+
+  Heitor: {
+    rit:0, fin:0, pas:0, con:0, def:0, fis:0,
+    foto:"images/foto.png",
+
+    ruaGanhas:0,
+    ruaParticipacoes:0,
+    ruaTime:"--",
+
+    championsGanhas:0,
+    championsParticipacoes:0,
+    championsTime:"--",
+
+    casualGanhas:0
+  }
 };
 
 function playClick() {
@@ -354,6 +551,23 @@ function playClick() {
   osc.stop(audio.currentTime + 0.08);
 }
 
+function playOpenCardSound() {
+  const audio = new AudioContext();
+  const osc = audio.createOscillator();
+  const gain = audio.createGain();
+
+  osc.connect(gain);
+  gain.connect(audio.destination);
+
+  osc.frequency.value = 720;
+  gain.gain.value = 0.05;
+
+  osc.start();
+  osc.frequency.exponentialRampToValueAtTime(320, audio.currentTime + 0.18);
+  gain.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + 0.2);
+  osc.stop(audio.currentTime + 0.22);
+}
+
 function showPage(page) {
   document.getElementById("home").classList.add("hidden");
   document.getElementById("copas").classList.add("hidden");
@@ -367,6 +581,8 @@ function showPage(page) {
 }
 
 function openPlayer(name) {
+  playOpenCardSound();
+
   const p = players[name];
 
   const overall = Math.round(
@@ -375,13 +591,9 @@ function openPlayer(name) {
 
   document.getElementById("playerArea").innerHTML = `
     <div class="player-card">
+
       <div class="card-top">
         <div class="overall">${String(overall).padStart(2,"0")}</div>
-
-        <div class="trophy-box">
-          <img src="images/427687.png" alt="Troféu">
-          <span>${p.copas}</span>
-        </div>
       </div>
 
       <img class="player-photo" src="${p.foto}" alt="${name}">
@@ -395,6 +607,39 @@ function openPlayer(name) {
         <div class="stat">CON ${String(p.con).padStart(2,"0")}</div>
         <div class="stat">DEF ${String(p.def).padStart(2,"0")}</div>
         <div class="stat">FÍS ${String(p.fis).padStart(2,"0")}</div>
+      </div>
+
+      <div class="trophy-section">
+
+        <div class="trophy-row">
+          <img src="${trophies.rua}" alt="Taça de Rua">
+          <div class="trophy-info">
+            <h3>Taça de Rua</h3>
+            <p>Copas ganhas: ${p.ruaGanhas}</p>
+            <p>Participações: ${p.ruaParticipacoes}</p>
+            <p>Time: ${p.ruaTime}</p>
+          </div>
+        </div>
+
+        <div class="trophy-row">
+          <img src="${trophies.champions}" alt="Taça Champions">
+          <div class="trophy-info">
+            <h3>Taça Champions</h3>
+            <p>Copas ganhas: ${p.championsGanhas}</p>
+            <p>Participações: ${p.championsParticipacoes}</p>
+            <p>Time: ${p.championsTime}</p>
+          </div>
+        </div>
+
+        <div class="trophy-row">
+          <img src="${trophies.casual}" alt="Taça Casual">
+          <div class="trophy-info">
+            <h3>Taça Casual</h3>
+            <p>Copas ganhas: ${p.casualGanhas}</p>
+            <p>Modalidade: individual</p>
+          </div>
+        </div>
+
       </div>
     </div>
   `;
