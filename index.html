@@ -139,13 +139,8 @@ section {
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-14px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
 }
 
 .section-title {
@@ -349,6 +344,8 @@ section {
 }
 
 .player-card {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   margin: 0 auto;
   padding: 25px;
@@ -358,6 +355,83 @@ section {
   box-shadow: 0 0 35px rgba(250,204,21,0.55);
   border: 4px solid #fff0a6;
   animation: cardAppear 0.4s ease;
+}
+
+.player-card.special-black {
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,0.12), transparent 25%),
+    linear-gradient(145deg, #020617, #111827, #000000);
+  color: white;
+  border: 4px solid #1f2937;
+  box-shadow:
+    0 0 35px rgba(0,0,0,0.9),
+    0 0 25px rgba(75,85,99,0.5);
+}
+
+.player-card.special-blue {
+  background:
+    radial-gradient(circle at top, rgba(147,197,253,0.55), transparent 28%),
+    linear-gradient(145deg, #0f172a, #1d4ed8, #38bdf8);
+  color: white;
+  border: 4px solid #93c5fd;
+  box-shadow:
+    0 0 35px rgba(56,189,248,0.75),
+    0 0 70px rgba(29,78,216,0.65);
+}
+
+.player-card.special-black::before,
+.player-card.special-black::after,
+.player-card.special-blue::before,
+.player-card.special-blue::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  pointer-events: none;
+  background-repeat: repeat;
+  animation: particlesMove 5s linear infinite;
+  opacity: 0.7;
+}
+
+.player-card.special-black::before {
+  background-image:
+    radial-gradient(circle, rgba(0,0,0,0.95) 0 3px, transparent 4px),
+    radial-gradient(circle, rgba(31,41,55,0.9) 0 2px, transparent 3px);
+  background-size: 45px 45px, 70px 70px;
+}
+
+.player-card.special-black::after {
+  background-image:
+    radial-gradient(circle, rgba(75,85,99,0.65) 0 2px, transparent 3px);
+  background-size: 55px 55px;
+  animation-duration: 7s;
+}
+
+.player-card.special-blue::before {
+  background-image:
+    radial-gradient(circle, rgba(147,197,253,0.95) 0 3px, transparent 4px),
+    radial-gradient(circle, rgba(56,189,248,0.9) 0 2px, transparent 3px);
+  background-size: 45px 45px, 70px 70px;
+}
+
+.player-card.special-blue::after {
+  background-image:
+    radial-gradient(circle, rgba(191,219,254,0.8) 0 2px, transparent 3px);
+  background-size: 55px 55px;
+  animation-duration: 7s;
+}
+
+@keyframes particlesMove {
+  from {
+    transform: translateY(0) rotate(0deg);
+  }
+  to {
+    transform: translateY(-80px) rotate(12deg);
+  }
+}
+
+.player-card > * {
+  position: relative;
+  z-index: 2;
 }
 
 @keyframes cardAppear {
@@ -409,6 +483,18 @@ section {
   background: rgba(255,255,255,0.35);
   padding: 10px;
   border-radius: 14px;
+}
+
+.special-black .stat {
+  background: rgba(255,255,255,0.12);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.special-blue .stat {
+  background: rgba(255,255,255,0.22);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.25);
 }
 
 .trophies-outside {
@@ -613,7 +699,7 @@ section {
 
     <h2 class="mvp-title">🔥 MVP 000 🔥</h2>
 
-    <img class="mvp-photo" src="images/images (33).jpeg" alt="MVP Player">
+    <img class="mvp-photo" src="images/foto.png" alt="MVP Player">
 
     <h3 class="mvp-name">Ainda ninguém</h3>
 
@@ -623,12 +709,12 @@ section {
 
     <div class="mvp-extra-list">
       <div class="mvp-extra">
-        <span>TOP 2 MVP 000</span>
+        <span>TOP 2 MVP</span>
         <p>Ainda ninguém</p>
       </div>
 
       <div class="mvp-extra">
-        <span>TOP 3 MVP 000</span>
+        <span>TOP 3 MVP</span>
         <p>Ainda ninguém</p>
       </div>
     </div>
@@ -829,6 +915,18 @@ function showPage(page) {
   document.getElementById(page).classList.remove("hidden");
 }
 
+function getCardClass(overall) {
+  if (overall >= 90) {
+    return "special-blue";
+  }
+
+  if (overall >= 85) {
+    return "special-black";
+  }
+
+  return "";
+}
+
 function openPlayer(name) {
   playOpenCardSound();
 
@@ -838,10 +936,12 @@ function openPlayer(name) {
     (p.rit + p.fin + p.pas + p.con + p.def + p.fis) / 6
   );
 
+  const cardClass = getCardClass(overall);
+
   document.getElementById("playerArea").innerHTML = `
     <div class="profile-layout">
 
-      <div class="player-card">
+      <div class="player-card ${cardClass}">
         <div class="overall">${String(overall).padStart(2,"0")}</div>
 
         <img class="player-photo" src="${p.foto}" alt="${name}">
